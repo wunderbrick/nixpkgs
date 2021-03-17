@@ -12,26 +12,24 @@ stdenv.mkDerivation rec {
 
   doCheck = true;
 
-  nativeBuildInputs = [ mono ];
+  buildInputs = [ mono ];
 
   installPhase = ''
-    rm juniper # original script
+    rm juniper # original script with regular Linux assumptions
     mkdir -p $out/bin
     cp -r ./* $out
-    echo -e "#!/bin/sh\n\n ${mono}/bin/mono $out/Juniper.exe $@" > $out/bin/juniper
+    echo -e "#!/bin/sh\n\n${mono}/bin/mono $out/Juniper.exe \$@" > $out/bin/juniper
     chmod +x $out/bin/juniper
   '';
 
   meta = with lib; {
-    description = "Juniper compiler and standard library targeting Arduino";
+    description = "Functional reactive programming language for programming Arduino";
     longDescription = ''
-      Juniper supports many features typical of functional programming languages, including algebraic data types, tuples, records, pattern matching, immutable data structures, parametric polymorphic functions, and anonymous functions (lambdas).
-
-       Some imperative programming concepts are also present in Juniper, such as for, while and do while loops, the ability to mark variables as mutable, and mutable references.
+      Juniper targets Arduino and supports many features typical of functional programming languages, including algebraic data types, tuples, records, pattern matching, immutable data structures, parametric polymorphic functions, and anonymous functions (lambdas). Some imperative programming concepts are also present in Juniper, such as for, while and do while loops, the ability to mark variables as mutable, and mutable references.
     '';
     homepage = "https://http://www.juniper-lang.org/";
     license = licenses.mit;
-    maintainers = [ ]; # maintainers.wunderbrick ];
+    maintainers = with maintainers; [ wunderbrick ];
     platforms = platforms.linux;
   };
 }

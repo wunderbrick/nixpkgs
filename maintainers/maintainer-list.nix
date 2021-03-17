@@ -10888,4 +10888,10 @@
     github = "zupo";
     githubId = 311580;
   };
+  wunderbrick = {
+    name = "Andrew Phipps";
+    email = "lambdafuzz@tutanota.com";
+    github = "wunderbrick";
+    githubId = 52174714;
+  };
 }
